@@ -6,7 +6,27 @@ import styles from './page.module.css'
 import './page.module.css'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faCog, faEllipsisV, faSearch, faCoffee, faFileExport, faL, } from '@fortawesome/free-solid-svg-icons';
+import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from "swiper/modules";
+
+
+import image1 from '/public/assets/item-1.jpg'
+
+const Carasual = ({ image }) => {
+  return (
+    <SwiperSlide>
+      <div style={{ width: '400px', height: '200px'}}>
+        <img
+          className={styles.logo}
+          src="/assets/item-1.jpg"
+          alt="Next.js Logo"
+          style={{ width: '100%', height: '100%',  objectFit: "cover"  }}
+        />
+      </div>
+    </SwiperSlide>
+  )
+}
 
 export default function Home() {
 
@@ -25,6 +45,15 @@ export default function Home() {
           <span>AI<span>.DROP</span></span>
         </div>
 
+        <FontAwesomeIcon
+          icon={faBars}
+          style={{
+            width: 30,
+            height: 30,
+          }}
+          className={styles.menu}
+        />
+
         {/* <section>
           <span className={styles.profile_text}>A</span>
           Apurba Ruidas
@@ -37,16 +66,34 @@ export default function Home() {
       </div>
 
       <div className={styles.center}>
-        <Image
+        {/* <Image
           className={styles.logo}
           src="/next.svg"
           alt="Next.js Logo"
           width={180}
           height={37}
           priority
-        />
+        /> */}
+        <Swiper
+          slidesPerView={"auto"}
+          spaceBetween={30}
+          pagination={{
+            clickable: true
+          }}
+          modules={[Pagination]}
+          className="mySwiper"
+          autoplay={true}
+          style={{ background: 'red' }}
+        >
+          <Carasual
+            image={image1}
+          />
+        </Swiper>
       </div>
 
+      <div>
+
+      </div>
       <div className={styles.grid}>
 
         <a
