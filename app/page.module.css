@@ -15,23 +15,57 @@
   max-width: var(--max-width);
   width: 100%;
   z-index: 2;
-  font-family: var(--font-mono);
+
 }
 
-.description a {
+.description div:first-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 2.4rem;
+  font-weight: 600;
+  background-color: transparent;
+}
+
+.description div:first-child span span {
+  font-size: 1rem;
+}
+
+.description section {
+  position: relative;
+  margin: 0;
+  padding: 1rem;
+  /* background-color: rgba(var(--callout-rgb), 0.5); */
+  /* border: 1px solid rgba(var(--callout-border-rgb), 0.3); */
+  border-radius: var(--border-radius);
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
 
-.description p {
+.logout{
+    background-color: rgba(var(--callout-rgb), 0.5);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   position: relative;
   margin: 0;
-  padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  padding: 0.7rem 1.2rem;
   border-radius: var(--border-radius);
+  cursor: pointer;
+}
+
+.profile_text {
+  display: flex;
+  background-color: rgb(var(--foreground-rgb));
+  color: rgb(var(--background-end-rgb));
+  width: 2rem;
+  height:2rem;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
 
 .code {
@@ -41,7 +75,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
+  grid-template-columns: repeat(2, minmax(50%, auto));
   max-width: 100%;
   width: var(--max-width);
   gap: 15px;
@@ -72,7 +106,7 @@
   opacity: 0.6;
   font-size: 0.9rem;
   line-height: 1.5;
-  max-width: 30ch;
+  /* max-width: 30ch; */
 }
 
 .center {
@@ -110,6 +144,7 @@
 .logo {
   position: relative;
 }
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
@@ -117,6 +152,11 @@
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
   }
 
+  .logout:hover {
+    background: rgba(var(--card-rgb), 0.1);
+    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+
+  }
   .card:hover span {
     transform: translateX(4px);
   }
@@ -160,48 +200,63 @@
 
   .description {
     font-size: 0.8rem;
+    align-items: center;
+    inset: 0 0 auto;
+    /* padding: 2rem 1rem 1.4rem; */
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
+    background-clip: padding-box;
+    backdrop-filter: blur(24px);
+    /* padding-top: 1.5rem; */
+    justify-content: flex-end;
+    position: fixed;
+    /* height: 75px; */
+    justify-content: space-between;
   }
 
-  .description a {
+  .description div:first-child {
     padding: 1rem;
   }
 
-  .description p,
+  .description section,
   .description div {
-    display: flex;
+    /* display: flex;
     justify-content: center;
     position: fixed;
-    width: 100%;
+    width: 100%; */
   }
 
-  .description p {
-    align-items: center;
+  .description section {
+    /* align-items: center;
     inset: 0 0 auto;
     padding: 2rem 1rem 1.4rem;
     border-radius: 0;
     border: none;
     border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
+    background: linear-gradient(to bottom,
+        rgba(var(--background-start-rgb), 1),
+        rgba(var(--callout-rgb), 0.5));
     background-clip: padding-box;
     backdrop-filter: blur(24px);
+    padding-top: 1.5rem;
+    justify-content: flex-end; */
   }
 
   .description div {
-    align-items: flex-end;
+    /* align-items: flex-end;
     pointer-events: none;
     inset: auto 0 0;
     padding: 2rem;
     height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
-    z-index: 1;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        rgb(var(--background-end-rgb)) 40%);
+    z-index: 1; */
+    /* display: none; */
   }
 }
 
@@ -226,6 +281,7 @@
   from {
     transform: rotate(360deg);
   }
+
   to {
     transform: rotate(0deg);
   }

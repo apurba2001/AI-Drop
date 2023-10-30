@@ -1,39 +1,39 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './page.module.css'
 
+import './page.module.css'
+import { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCog, faEllipsisV, faSearch, faCoffee, faFileExport, faL, } from '@fortawesome/free-solid-svg-icons';
+
 export default function Home() {
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <div>
-          <a
-            // href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-           <Image
-              src="/airdrop_a.svg"
-              alt="Vercel Logo2"
-              className={styles.vercelLogo}
-              width={30}
-              height={30}
-              priority
-            />
-            <Image
-              src="/aidrop.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <Image
+            src="/airdrop_a.svg"
+            alt="Vercel Logo2"
+            className={styles.vercelLogo}
+            width={34}
+            height={34}
+            priority
+          />
+          <span>AI<span>.DROP</span></span>
         </div>
 
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.js</code>
-        </p>
+        {/* <section>
+          <span className={styles.profile_text}>A</span>
+          Apurba Ruidas
+          <p className={styles.logout}>
+            Logout
+          </p>
+        </section> */}
+
+
       </div>
 
       <div className={styles.center}>
@@ -48,29 +48,6 @@ export default function Home() {
       </div>
 
       <div className={styles.grid}>
-        {/* <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a> */}
 
         <a
           // href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
@@ -79,23 +56,20 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Large Airdrops
+            Large Airdrops <span>-&gt;</span>
           </h2>
-          <p>Explore the Next.js 13 playground.</p>
+          <p>A large airdrop in cryptocurrency involves the distribution of a significant number of tokens or coins to a large number of recipients, often as part of a major marketing or community-building initiative. These airdrops can distribute millions or even billions of tokens to participants.</p>
         </a>
 
         <a
-          // href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className={styles.card}
           target="_blank"
           rel="noopener noreferrer"
         >
           <h2>
-          Small Airdrops
+            Small Airdrops  <span>-&gt;</span>
           </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
+          <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
         </a>
       </div>
     </main>
