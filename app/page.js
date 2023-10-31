@@ -8,25 +8,9 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from "swiper/modules";
+// import { Pagination } from "swiper/modules";
 
-
-import image1 from '/public/assets/item-1.jpg'
-
-const Carasual = ({ image }) => {
-  return (
-    <SwiperSlide>
-      <div style={{ width: '400px', height: '200px'}}>
-        <img
-          className={styles.logo}
-          src="/assets/item-1.jpg"
-          alt="Next.js Logo"
-          style={{ width: '100%', height: '100%',  objectFit: "cover"  }}
-        />
-      </div>
-    </SwiperSlide>
-  )
-}
+import Carousel from './components/Carousel/Carousel'
 
 export default function Home() {
 
@@ -54,41 +38,19 @@ export default function Home() {
           className={styles.menu}
         />
 
-        {/* <section>
+        <section>
           <span className={styles.profile_text}>A</span>
           Apurba Ruidas
           <p className={styles.logout}>
             Logout
           </p>
-        </section> */}
+        </section>
 
 
       </div>
 
       <div className={styles.center}>
-        {/* <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        /> */}
-        <Swiper
-          slidesPerView={"auto"}
-          spaceBetween={30}
-          pagination={{
-            clickable: true
-          }}
-          modules={[Pagination]}
-          className="mySwiper"
-          autoplay={true}
-          style={{ background: 'red' }}
-        >
-          <Carasual
-            image={image1}
-          />
-        </Swiper>
+        <Carousel/>
       </div>
 
       <div>

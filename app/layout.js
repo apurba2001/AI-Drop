@@ -8,6 +8,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas);
 
 import 'swiper/css';
+import 'swiper/css/pagination';
+
 
 export const metadata = {
   title: 'Aidrop',
