@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem;
+  /* padding: 3rem; */
   min-height: 100vh;
 }
 
@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem;
+  /* padding: 3rem; */
   min-height: 100vh;
   /* justify-content: center;
   align-items: center; */
@@ -38,6 +38,7 @@
   font-size: 2.4rem;
   font-weight: 600;
   background-color: transparent;
+  padding: 16px;
 }
 
 .description div:first-child span span {
@@ -63,13 +64,32 @@
 
 
 .logout {
-  background-color: rgba(var(--callout-rgb), 0.5);
+  background-color: rgba(var(--foreground-rgb), .1) !important;
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   position: relative;
   margin: 0;
   padding: 0.7rem 1.2rem;
-  border-radius: var(--border-radius);
+  border-radius:10px;
   cursor: pointer;
+  color: rgb(var(--foreground-rgb));;
+}
+
+.logout2 {
+  background-color: rgba(var(--foreground-rgb), .1) !important;
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  position: relative;
+  margin: 0;
+  padding: 0.7rem 1.2rem;
+  border-radius:10px;
+  cursor: pointer;
+  color: rgb(var(--foreground-rgb));
+  width: 100% !important;
+}
+
+
+
+.logout:active, .logout2:active {
+  background-color: rgba(var(--foreground-rgb), 0.2) !important;
 }
 
 .profile_text {
@@ -145,7 +165,7 @@
   }
 
   .logout:hover {
-    background: rgba(var(--card-rgb), 0.1);
+    background: rgba(var(--card-rgb), 0.2);
     border: 1px solid rgba(var(--card-border-rgb), 0.15);
 
   }

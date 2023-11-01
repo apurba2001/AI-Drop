@@ -12,6 +12,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Carousel from './components/Carousel/Carousel'
 
+import {
+  Button
+} from '@chakra-ui/react'
+
 export default function Home() {
 
   return (
@@ -26,7 +30,7 @@ export default function Home() {
             height={34}
             priority
           />
-          <span>AI<span>.DROP</span></span>
+          <span>AI<span>DROP</span></span>
         </div>
 
         <FontAwesomeIcon
@@ -41,16 +45,14 @@ export default function Home() {
         <section>
           <span className={styles.profile_text}>A</span>
           Apurba Ruidas
-          <p className={styles.logout}>
-            Logout
-          </p>
+          <Button className={styles.logout} colorScheme='whiteAlpha'>Logout</Button>
         </section>
 
 
       </div>
 
       <div className={styles.center}>
-        <Carousel/>
+        <Carousel />
       </div>
 
       <div>

@@ -10,6 +10,7 @@ library.add(fas);
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import ChakraProvider from './chakraUi'
 
 export const metadata = {
   title: 'Aidrop',
@@ -19,7 +20,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ChakraProvider>
+          {children}
+        </ChakraProvider>
+      </body>
     </html>
   )
 }

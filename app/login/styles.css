@@ -1,12 +1,85 @@
-.card{
+.card {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 300px;
 }
 
-.grid{
-    height:100%;
+.grid {
+    height: 100%;
     width: 100%;
+}
 
+.card input {
+    border: 1.2px solid rgba(var(--card-border-rgb), 0.15);
+    background: rgba(var(--card-rgb), 0.1);
+    border-radius: 10px;
+    height: 3rem !important;
+    transition: 0.3s;
+}
+
+
+.card input:focus {
+
+    border-color: var(--card-border-rgb);
+    box-shadow: none;
+    border-radius: 10px;
+
+}
+
+.card h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.card button {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    height: 3rem !important;
+    background-color: rgba(var(--foreground-rgb), .8) !important;
+    color: rgb(var(--background-end-rgb));
+    ;
+}
+
+.card button:active {
+    background-color: rgba(var(--foreground-rgb), .5) !important;
+}
+
+.chakra-slide {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+.drawer-header {}
+
+.drawer-header:first-child {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 2.4rem;
+    font-weight: 600;
+    /* padding: 16px; */
+    position: relative;
+}
+
+.drawer-header:first-child span span {
+    font-size: 1rem;
+}
+
+.drawer-close-btn{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translate(0, -50%);
 }
