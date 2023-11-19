@@ -1,14 +1,12 @@
 .card {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
     width: 300px;
+    padding: 4rem 0;
+    padding-top: 8rem;
 }
 
 .grid {
@@ -26,11 +24,9 @@
 
 
 .card input:focus {
-
     border-color: var(--card-border-rgb);
     box-shadow: none;
     border-radius: 10px;
-
 }
 
 .card h1 {
@@ -60,16 +56,13 @@
             rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
 
-.drawer-header {}
 
 .drawer-header:first-child {
     display: flex;
-    /* justify-content: center; */
     align-items: center;
     gap: 0.2rem;
     font-size: 2.4rem;
     font-weight: 600;
-    /* padding: 16px; */
     position: relative;
 }
 
@@ -77,9 +70,30 @@
     font-size: 1rem;
 }
 
-.drawer-close-btn{
+.drawer-close-btn {
     position: absolute;
     right: 0px;
     top: 50%;
     transform: translate(0, -50%);
+}
+
+.div-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.div-container p{
+    /* font-weight: 700 ; */
+}
+
+
+@media (max-width: 700px) {
+    .card {
+        padding-top: 8rem;
+    }
+    
 }

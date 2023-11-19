@@ -3,7 +3,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* padding: 3rem; */
   min-height: 100vh;
 }
 
@@ -11,11 +10,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* padding: 3rem; */
   min-height: 100vh;
-  /* justify-content: center;
-  align-items: center; */
   position: relative;
+}
+
+.telegram{
+  background-color: rgb(var(--foreground-rgb));
+  position: fixed;
+  z-index: 999;
+  border-radius: 50%;
+  width: 50px;
+  padding: 12px;
+  /* box-shadow: rgb(var(--foreground-rgb))  0px 2px 8px 0px; */
+  bottom: 30px;
+  right: 30px;
+}
+
+.telegram img{
+  margin-right: 15px;
 }
 
 
@@ -24,9 +36,20 @@
   justify-content: inherit;
   align-items: inherit;
   font-size: 0.85rem;
-  max-width: var(--max-width);
   width: 100%;
   z-index: 2;
+  justify-content: space-between;
+
+  inset: 0 0 auto;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
+  background: linear-gradient(to bottom,
+      rgba(var(--background-start-rgb), 1),
+      rgba(var(--callout-rgb), 0.5));
+  background-clip: padding-box;
+  backdrop-filter: blur(24px);
+  position: fixed;
   justify-content: space-between;
 }
 
@@ -116,6 +139,7 @@
   max-width: 100%;
   width: var(--max-width);
   gap: 15px;
+  margin-bottom: 2rem;
 }
 
 .card {
@@ -150,8 +174,9 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 4rem 0;
+  padding: 2rem 0;
   max-width: var(--max-width);
+  padding-top: 8rem;
 }
 
 .logo {
@@ -161,12 +186,12 @@
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
     background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+    border: 1px solid rgba(var(--card-border-rgb), 0.5);
   }
 
   .logout:hover {
     background: rgba(var(--card-rgb), 0.2);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
+    border: 1px solid rgba(var(--card-border-rgb), 0.5);
 
   }
 
@@ -176,9 +201,9 @@
 }
 
 @media (prefers-reduced-motion) {
-  .card:hover span {
+  /* .card:hover span {
     transform: none;
-  }
+  } */
 }
 
 @media (max-width: 700px) {
@@ -188,6 +213,7 @@
 
   .main {
     padding: 1rem;
+  
   }
 
   .content {
@@ -197,7 +223,7 @@
   .grid {
     grid-template-columns: 1fr;
     margin-bottom: 2rem;
-    text-align: center;
+    /* text-align: center; */
   }
 
   .card {

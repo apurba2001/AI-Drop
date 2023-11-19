@@ -42,10 +42,10 @@ const Carousel = () => {
             loop={true}
             centeredSlides={true}
             navigation={true}
-            autoplay={{
-                delay: 2500,
-                disableOnInteraction: false,
-            }}
+            // autoplay={{
+            //     delay: 2500,
+            //     disableOnInteraction: false,
+            // }}
         >
 
             <SwiperSlide>

@@ -1,16 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import styles from './page.module.css'
-
-import './page.module.css'
+import styles from './styles.module.css'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faB, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Pagination } from "swiper/modules";
 import { IconButton } from '@chakra-ui/react'
-import Carousel from './components/Carousel/Carousel'
 
 import {
   Button
@@ -26,7 +23,8 @@ import {
   DrawerCloseButton,
   Avatar
 } from '@chakra-ui/react'
-import './auth/styles.css'
+
+import '../auth/styles.css'
 
 export default function Home() {
 
@@ -73,13 +71,9 @@ export default function Home() {
 
       </div>
 
-      <div className={styles.center}>
-        <Carousel />
-      </div>
-
-      <div>
-
-      </div>
+      <h1 className='airdrop-header'>
+        Small Airdrops
+      </h1>
       <div className={styles.grid}>
 
         <a
@@ -88,7 +82,7 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Large Airdrops <span>-&gt;</span>
+            Airdrops One <span>-&gt;</span>
           </h2>
           <p>A large airdrop in cryptocurrency involves the distribution of a significant number of tokens or coins to a large number of recipients, often as part of a major marketing or community-building initiative. These airdrops can distribute millions or even billions of tokens to participants.</p>
         </a>
@@ -99,11 +93,24 @@ export default function Home() {
           rel="noopener noreferrer"
         >
           <h2>
-            Small Airdrops  <span>-&gt;</span>
+            Airdrop Two  <span>-&gt;</span>
+          </h2>
+          <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
+        </a>
+
+        <a
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            Airdrop Three  <span>-&gt;</span>
           </h2>
           <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
         </a>
       </div>
+
+
       <button className={styles.telegram}>
         <img src='/assets/telegram.png' />
       </button>

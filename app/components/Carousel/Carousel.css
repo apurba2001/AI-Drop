@@ -1,6 +1,6 @@
 .carasual-main {
     /* padding-left: 8rem; */
-    max-width: calc(var(--max-width) - 200px);
+    /* max-width: calc(var(--max-width) - 200px); */
     border-radius: var( --border-radius)
 }
 
@@ -30,7 +30,7 @@
 }
 
 .swiper-slide {
-    width: 60%;
+    /* width: 60%; */
 }
 
 

@@ -1,22 +1,15 @@
 'use client'
 
 import Image from 'next/image'
-import styles from '../page.module.css'
+import styles from './styles.module.css'
 import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faL, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faB, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
 // import { Pagination } from "swiper/modules";
-
-// import Carousel from './components/Carousel/Carousel'
-import './styles.css'
+import { IconButton } from '@chakra-ui/react'
 
 import {
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
   Button
 } from '@chakra-ui/react'
 
@@ -28,7 +21,10 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Avatar
 } from '@chakra-ui/react'
+
+import '../auth/styles.css'
 
 export default function Home() {
 
@@ -42,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <main className={styles.main2}>
+    <main className={styles.main}>
       <div className={styles.description}>
         <div>
           <Image
@@ -67,56 +63,57 @@ export default function Home() {
         />
 
         <section>
-          <Button
-            className={styles.logout}
-            colorScheme='whiteAlpha'
-            onClick={() => setIsLogined(prevState => !prevState)}
-          >
-            {
-              isLogined ? 'Sign Up' : 'Login'
-            }
-
-          </Button>
+          <span className={styles.profile_text}>A</span>
+          Apurba Ruidas
+          <Button className={styles.logout} colorScheme='whiteAlpha'>Logout</Button>
         </section>
 
 
       </div>
 
-      <div className='card'>
-        <h1>{isLogined ? 'Login' : 'SignUp'} to Aidrop</h1>
+      <h1 className='airdrop-header'>
+        Large Airdrops
+      </h1>
+      <div className={styles.grid}>
 
-        {
-          !isLogined && (<FormControl>
-            <FormLabel>Name</FormLabel>
-            <Input type='email' placeholder='Jhon Doe' />
-            <FormErrorMessage>We'll never share your email.</FormErrorMessage>
-          </FormControl>)
-        }
-        <FormControl>
-          <FormLabel>Email address</FormLabel>
-          <Input type='email' placeholder='user@domain.com' />
-          <FormErrorMessage>We'll never share your email.</FormErrorMessage>
-        </FormControl>
-        <FormControl>
-          <FormLabel>Password</FormLabel>
-          <Input type='email' placeholder='*********' />
-          <FormErrorMessage>We'll never share your email.</FormErrorMessage>
-        </FormControl>
-        {
-          !isLogined && (<FormControl>
-            <FormLabel>Cunfirm password</FormLabel>
-            <Input type='password' placeholder='*********' />
-            <FormErrorMessage>We'll never share your email.</FormErrorMessage>
-          </FormControl>)
-        }
-        <Button colorScheme='whiteAlpha'>{isLogined ? 'Login' : 'Sign Up'}</Button>
+        <a
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            Airdrops One <span>-&gt;</span>
+          </h2>
+          <p>A large airdrop in cryptocurrency involves the distribution of a significant number of tokens or coins to a large number of recipients, often as part of a major marketing or community-building initiative. These airdrops can distribute millions or even billions of tokens to participants.</p>
+        </a>
+
+        <a
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            Airdrop Two  <span>-&gt;</span>
+          </h2>
+          <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
+        </a>
+
+        <a
+          className={styles.card}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <h2>
+            Airdrop Three  <span>-&gt;</span>
+          </h2>
+          <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
+        </a>
       </div>
-
-
-
+      <button className={styles.telegram}>
+        <img src='/assets/telegram.png' />
+      </button>
 
       <Drawer
-       
         isOpen={drawerOpen}
         size={"full"}
       >
@@ -148,6 +145,13 @@ export default function Home() {
           </DrawerHeader>
           <DrawerBody>
 
+            <div className='div-container'>
+              <Avatar
+                size={'lg'}
+              />
+              <p>Apurba Ruidas</p>
+            </div>
+
             <Button
               className={styles.logout2}
               colorScheme='whiteAlpha'
@@ -156,9 +160,7 @@ export default function Home() {
                 setDrawerOpen(false)
               }}
             >
-              {
-                isLogined ? 'Sign Up' : 'Login'
-              }
+              Logout
 
             </Button>
 
@@ -166,7 +168,6 @@ export default function Home() {
           </DrawerBody>
         </DrawerContent>
       </Drawer>
-
     </main>
   )
 }
