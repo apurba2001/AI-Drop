@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import styles from '../page.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faL, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './styles.css'
@@ -23,15 +23,25 @@ import {
 
 import { validate } from 'react-email-validator'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import AuthCode from 'react-auth-code-input';
 
 
 export default function Home() {
+  const router = useRouter()
 
-  const [isLogined, setIsLogined] = useState(false);
+  const [isLogined, setIsLogined] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [formData, setFormData] = useState({})
   const [errors, setErrors] = useState({})
   const [loader, setLoader] = useState(false)
+
+  const [isVerify, setIsVerify] = useState(true)
+  const [verificationCode, setVerificationCode] = useState(null)
+  const [verificationTimer, setVerificationTimer] = useState(45)
+
+  // useEffect()
+
 
   const handleInput = (e) => {
     if (Object.keys(errors).length !== 0) {
@@ -94,18 +104,25 @@ export default function Home() {
     if (!validateData()) {
       return
     }
+    setLoader(true)
 
     try {
-      // if(isLogined){
+      if (isLogined) {
 
-      // }else{
-      console.log('called')
-      await axios.post('api/users/signup', formData)
-      // }
+      } else {
+        const res = await axios.post('api/users/signup', formData)
+        setFormData({})
+        setIsLogined(true)
+      }
     } catch (error) {
+      console.log(error.response.status)
+
+      if (error.response.status === 409) {
+        setErrors({ email: error.response.data.message })
+      }
 
     } finally {
-
+      setLoader(false)
     }
   }
 
@@ -152,66 +169,96 @@ export default function Home() {
       </div>
 
 
+      {
+        isVerify ? (
+          <div className='card'>
+            <h1>Verify email</h1>
 
-      <div className='card'>
-        <h1>{isLogined ? 'Login' : 'SignUp'} to Aidrop</h1>
 
-        {
-          !isLogined && (
-            <FormControl isInvalid={errors.name}>
-              <FormLabel>Name</FormLabel>
+            <div className='verify-input-container'>
+              <AuthCode
+                length={5}
+                autoFocus={true}
+                allowedCharacters='numeric'
+              />
+            </div>
+
+            <p className='verification-message'>We've sent a verification code to your email address. Please check your inbox and enter the code below to complete the registration process.</p>
+
+
+
+            <div className='button-container'>
+              <p>Resend code {verificationTimer}</p>
+              <Button
+                isLoading={loader}
+                onClick={handleAuthRequest}
+                colorScheme='whiteAlpha'
+              >Verify</Button>
+            </div>
+
+          </div>
+        ) : (
+          <div className='card'>
+            <h1>{isLogined ? 'Login' : 'SignUp'} to Aidrop</h1>
+
+            {
+              !isLogined && (
+                <FormControl isInvalid={errors.name}>
+                  <FormLabel>Name</FormLabel>
+                  <Input
+                    type='text'
+                    placeholder='Enter name'
+                    onChange={handleInput}
+                    name='name'
+                    value={formData.name || ''}
+                  />
+                  <FormErrorMessage>{errors.name}</FormErrorMessage>
+                </FormControl>)
+            }
+
+            <FormControl isInvalid={errors.email}>
+              <FormLabel>Email address</FormLabel>
+              <Input
+                type='email'
+                placeholder='Enter email'
+                name='email'
+                value={formData.email || ''}
+                onChange={handleInput}
+              />
+              <FormErrorMessage>{errors.email}</FormErrorMessage>
+            </FormControl>
+            <FormControl isInvalid={errors.password}>
+              <FormLabel>Password</FormLabel>
               <Input
                 type='text'
-                placeholder='Enter name'
+                placeholder='Enter password'
+                name='password'
                 onChange={handleInput}
-                name='name'
-                value={formData.name || ''}
+                value={formData.password || ''}
+
               />
-              <FormErrorMessage>{errors.name}</FormErrorMessage>
-            </FormControl>)
-        }
-
-        <FormControl isInvalid={errors.email}>
-          <FormLabel>Email address</FormLabel>
-          <Input
-            type='email'
-            placeholder='Enter email'
-            name='email'
-            value={formData.email || ''}
-            onChange={handleInput}
-          />
-          <FormErrorMessage>{errors.email}</FormErrorMessage>
-        </FormControl>
-        <FormControl isInvalid={errors.password}>
-          <FormLabel>Password</FormLabel>
-          <Input
-            type='text'
-            placeholder='Enter password'
-            name='password'
-            onChange={handleInput}
-            value={formData.password || ''}
-
-          />
-          <FormErrorMessage>{errors.password}</FormErrorMessage>
-        </FormControl>
-        {
-          !isLogined && (<FormControl isInvalid={errors.confirmPassword}>
-            <FormLabel>Cunfirm password</FormLabel>
-            <Input
-              type='password'
-              placeholder='*********'
-              name='confirmPassword'
-              onChange={handleInput}
-              value={formData.confirmPassword || ''}
-            />
-            <FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
-          </FormControl>)
-        }
-        <Button
-          onClick={handleAuthRequest}
-          colorScheme='whiteAlpha'>{isLogined ? 'Login' : 'Sign Up'}</Button>
-      </div>
-
+              <FormErrorMessage>{errors.password}</FormErrorMessage>
+            </FormControl>
+            {
+              !isLogined && (<FormControl isInvalid={errors.confirmPassword}>
+                <FormLabel>Cunfirm password</FormLabel>
+                <Input
+                  type='password'
+                  placeholder='*********'
+                  name='confirmPassword'
+                  onChange={handleInput}
+                  value={formData.confirmPassword || ''}
+                />
+                <FormErrorMessage>{errors.confirmPassword}</FormErrorMessage>
+              </FormControl>)
+            }
+            <Button
+              isLoading={loader}
+              onClick={handleAuthRequest}
+              colorScheme='whiteAlpha'>{isLogined ? 'Login' : 'Sign Up'}</Button>
+          </div>
+        )
+      }
       <Drawer
         isOpen={drawerOpen}
         size={"full"}

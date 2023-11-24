@@ -77,7 +77,7 @@
     transform: translate(0, -50%);
 }
 
-.div-container{
+.div-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -86,7 +86,7 @@
     margin-bottom: 20px;
 }
 
-.div-container p{
+.div-container p {
     /* font-weight: 700 ; */
 }
 
@@ -95,5 +95,41 @@
     .card {
         padding-top: 8rem;
     }
-    
+
+}
+
+.verify-input-container {
+    width: 100%;
+}
+
+.verify-input-container div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.verify-input-container div input {
+    width: 3rem;
+    text-align: center;
+}
+
+.verification-message {
+    font-size: 12px;
+    color: gray;
+}
+
+.button-container {
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
+}
+
+.button-container p {
+    position: absolute;
+    top: -15px;
+    font-size: 12px;
+    color: var(--geist-success);
+    right: 15px;
+    cursor: default;
 }

@@ -25,9 +25,14 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Password must be at least 6 characters long'
         }
-    }
+    },
+    forgetPasswordCode: String,
+    forgetPasswordCodeExpiary: String,
+    verificationCode: String,
+    verifyCodeExpiary: String,
+    isVerified: Boolean
 }, { timestamps: true });
 
-const User = mongoose.model('users', userSchema);
+const User = mongoose.models.users || mongoose.model('users', userSchema);
 
 export default User;

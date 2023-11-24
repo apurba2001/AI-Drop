@@ -2,6 +2,8 @@ import connect from '../../../DB'
 import User from '../../../models'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
+import moment from 'moment'
+
 
 connect()
 
@@ -9,25 +11,27 @@ export const POST = async (request) => {
     try {
         const { name, email, password } = await request.json();
 
-        // Check if the user already exists
+        console.log(name, email, password)
+
         const existingUser = await User.findOne({ email });
 
+        console.log(existingUser)
+
         if (existingUser) {
-            // User with the provided email already exists
             return NextResponse.json({ message: 'User already exists' }, { status: 409 });
         }
 
-        // Hash the password before saving it to the database
-        const hashedPassword = await bcrypt.hash(password, 10);
+        console.log(existingUser)
 
-        // Create a new user
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt);
+
         const newUser = new User({
             name,
             email,
             password: hashedPassword,
         });
 
-        // Save the user to the database
         await newUser.save();
 
         return NextResponse.json({ message: 'User registration successful' }, { status: 201 });
@@ -35,6 +39,7 @@ export const POST = async (request) => {
         console.error('Error:', error.message);
         return NextResponse.json({ message: 'Error during registration' }, { status: 500 });
     } finally {
-        // You can perform cleanup or additional actions here if needed
+
     }
-};
+}
+
