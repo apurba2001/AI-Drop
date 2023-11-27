@@ -4,7 +4,7 @@ import Image from 'next/image'
 import styles from './page.module.css'
 
 import './page.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faB, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -38,7 +38,12 @@ export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
-  const userData = getUserData()
+  const [userData, setUserData] = useState({})
+
+  useEffect(() => {
+    const userData = getUserData()
+    setUserData(userData)
+  }, [])
 
   console.log(userData)
 
