@@ -41,11 +41,13 @@ export default function Home() {
   const [userData, setUserData] = useState({})
 
   useEffect(() => {
+    let token = localStorage.getItem('token')
+    if(!token){
+      router.push('auth')
+    }
     const userData = getUserData()
     setUserData(userData)
   }, [])
-
-  console.log(userData)
 
 
   const onDrawerClose = () => {
@@ -87,7 +89,6 @@ export default function Home() {
             }}
           >Logout</Button>
         </section>
-
 
       </div>
 
@@ -179,10 +180,7 @@ export default function Home() {
               }}
             >
               Logout
-
             </Button>
-
-
           </DrawerBody>
         </DrawerContent>
       </Drawer>
