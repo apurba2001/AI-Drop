@@ -132,4 +132,5 @@
     color: var(--geist-success);
     right: 15px;
     cursor: default;
+    text-decoration: underline;
 }

@@ -37,16 +37,14 @@ export const PATCH = async (request) => {
             }
         });
 
-        const verificationCode = "123456"; // Replace with the actual verification code
-
         const info = await transporter.sendMail({
-            from: 'aidrop.noreply@example.com',
+            from: 'apurbaruidas0358@gmail.com',
             to: email,
             subject: "Email Verification Code",
-            text: `Hello!\n\nThank you for registering with Aidrop. Please use the following verification code to complete your registration:\n\nVerification Code: ${verificationCode}\n\nIf you didn't request this code, you can safely ignore this email.\n\nBest regards,\nThe AidropOfficial Team`,
+            text: `Hello!\n\nThank you for registering with Aidrop. Please use the following verification code to complete your registration:\n\nVerification Code: ${code}\n\nIf you didn't request this code, you can safely ignore this email.\n\nBest regards,\nThe AidropOfficial Team`,
         });
 
-        return NextResponse.json({ message: 'Verification code sent successfully' }, { status: 200 });
+        return NextResponse.json({ message: 'Verification code sent successfully', info }, { status: 200 });
 
     } catch (error) {
         console.error('Error:', error.message);

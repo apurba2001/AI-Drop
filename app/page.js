@@ -27,12 +27,20 @@ import {
   Avatar
 } from '@chakra-ui/react'
 import './auth/styles.css'
+import Link from 'next/link'
 
+import getUserData from './scripts/getUserData'
+// import handleLogout from './scripts/handleLogout'
+import { useRouter } from 'next/navigation';
 export default function Home() {
-
+  const router = useRouter();
   const [isLogined, setIsLogined] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const userData = getUserData()
+
+  console.log(userData)
 
 
   const onDrawerClose = () => {
@@ -66,8 +74,13 @@ export default function Home() {
 
         <section>
           <span className={styles.profile_text}>A</span>
-          Apurba Ruidas
-          <Button className={styles.logout} colorScheme='whiteAlpha'>Logout</Button>
+          {userData.name}
+          <Button className={styles.logout} colorScheme='whiteAlpha'
+            onClick={() => {
+              localStorage.removeItem('token')
+              router.push('auth')
+            }}
+          >Logout</Button>
         </section>
 
 
@@ -82,27 +95,29 @@ export default function Home() {
       </div>
       <div className={styles.grid}>
 
-        <a
+        <Link
           className={styles.card}
-          target="_blank"
+          // target="_blank"
           rel="noopener noreferrer"
+          href="/large-airdrop"
         >
           <h2>
             Large Airdrops <span>-&gt;</span>
           </h2>
           <p>A large airdrop in cryptocurrency involves the distribution of a significant number of tokens or coins to a large number of recipients, often as part of a major marketing or community-building initiative. These airdrops can distribute millions or even billions of tokens to participants.</p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className={styles.card}
-          target="_blank"
+          // target="_blank"
           rel="noopener noreferrer"
+          href="/small-airdrop"
         >
           <h2>
             Small Airdrops  <span>-&gt;</span>
           </h2>
           <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
-        </a>
+        </Link>
       </div>
       <button className={styles.telegram}>
         <img src='/assets/telegram.png' />
@@ -141,10 +156,10 @@ export default function Home() {
           <DrawerBody>
 
             <div className='div-container'>
-              <Avatar 
+              <Avatar
                 size={'lg'}
               />
-              <p>Apurba Ruidas</p>
+              <p>{userData.name}</p>
             </div>
 
             <Button
@@ -153,6 +168,9 @@ export default function Home() {
               onClick={() => {
                 setIsLogined(prevState => !prevState)
                 setDrawerOpen(false)
+                localStorage.removeItem('token')
+                router.push('auth')
+                // handleLogout()
               }}
             >
               Logout

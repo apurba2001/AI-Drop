@@ -9,19 +9,13 @@ connect()
 
 export const POST = async (request) => {
     try {
-        const { name, email, password } = await request.json();
-
-        console.log(name, email, password)
+        const { name, email, password } = await request.json()
 
         const existingUser = await User.findOne({ email });
-
-        console.log(existingUser)
 
         if (existingUser) {
             return NextResponse.json({ message: 'User already exists' }, { status: 409 });
         }
-
-        console.log(existingUser)
 
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt);

@@ -4,13 +4,11 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
-
 library.add(fas);
-
 import 'swiper/css';
 import 'swiper/css/pagination';
-
 import ChakraProvider from './chakraUi'
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: 'Aidrop',
@@ -21,6 +19,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Toaster
+        position='bottom-center'
+         />
         <ChakraProvider>
           {children}
         </ChakraProvider>

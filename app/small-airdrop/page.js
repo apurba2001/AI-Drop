@@ -25,6 +25,7 @@ import {
 } from '@chakra-ui/react'
 
 import '../auth/styles.css'
+import Link from 'next/link'
 
 export default function Home() {
 
@@ -36,6 +37,8 @@ export default function Home() {
   const onDrawerClose = () => {
     setDrawerOpen(false)
   }
+
+  
 
   return (
     <main className={styles.main}>
@@ -76,38 +79,38 @@ export default function Home() {
       </h1>
       <div className={styles.grid}>
 
-        <a
+        <Link
           className={styles.card}
-          target="_blank"
+          href="/large-airdrop/1234"
           rel="noopener noreferrer"
         >
           <h2>
             Airdrops One <span>-&gt;</span>
           </h2>
           <p>A large airdrop in cryptocurrency involves the distribution of a significant number of tokens or coins to a large number of recipients, often as part of a major marketing or community-building initiative. These airdrops can distribute millions or even billions of tokens to participants.</p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className={styles.card}
-          target="_blank"
+          href="/large-airdrop/1234"
           rel="noopener noreferrer"
         >
           <h2>
             Airdrop Two  <span>-&gt;</span>
           </h2>
           <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
-        </a>
+        </Link>
 
-        <a
+        <Link
           className={styles.card}
-          target="_blank"
+          href="/large-airdrop/1234"
           rel="noopener noreferrer"
         >
           <h2>
             Airdrop Three  <span>-&gt;</span>
           </h2>
           <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
-        </a>
+        </Link>
       </div>
 
 
@@ -148,7 +151,7 @@ export default function Home() {
           <DrawerBody>
 
             <div className='div-container'>
-              <Avatar 
+              <Avatar
                 size={'lg'}
               />
               <p>Apurba Ruidas</p>

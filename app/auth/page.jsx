@@ -25,7 +25,7 @@ import { validate } from 'react-email-validator'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import AuthCode from 'react-auth-code-input';
-
+import toast from 'react-hot-toast';
 
 export default function Home() {
   const router = useRouter()
@@ -36,7 +36,7 @@ export default function Home() {
   const [errors, setErrors] = useState({})
   const [loader, setLoader] = useState(false)
 
-  const [isVerify, setIsVerify] = useState(true)
+  const [isVerify, setIsVerify] = useState(false)
   const [verificationCode, setVerificationCode] = useState(null)
   const [verificationTimer, setVerificationTimer] = useState(45)
 
@@ -100,7 +100,6 @@ export default function Home() {
 
 
   const handleAuthRequest = async () => {
-
     if (!validateData()) {
       return
     }
@@ -108,15 +107,20 @@ export default function Home() {
 
     try {
       if (isLogined) {
-
+        const res = await axios.post('api/users/login', formData)
+        setFormData({})
+        toast.success('Login successful')
+        localStorage.setItem('token', res.data.token)
+        router.push('/');
       } else {
         const res = await axios.post('api/users/signup', formData)
         setFormData({})
+        toast.success('Signup successfull');
         setIsLogined(true)
       }
     } catch (error) {
-      console.log(error.response.status)
-
+      console.log(error.response.data.message)
+      toast.error(error.response.data.message)
       if (error.response.status === 409) {
         setErrors({ email: error.response.data.message })
       }
