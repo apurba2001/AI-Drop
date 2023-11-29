@@ -12,6 +12,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { IconButton } from '@chakra-ui/react'
 import Carousel from './components/Carousel/Carousel'
 
+
 import {
   Button
 } from '@chakra-ui/react'
@@ -30,8 +31,50 @@ import './auth/styles.css'
 import Link from 'next/link'
 
 import getUserData from './scripts/getUserData'
-// import handleLogout from './scripts/handleLogout'
 import { useRouter } from 'next/navigation';
+import ToggleButton from './components/ThemeButton/ThemeButton'
+import { DarkModeSwitch } from 'react-toggle-dark-mode';
+
+const useDarkMode = () => {
+  const [prefersDarkMode, setPrefersDarkMode] = useState(false);
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme) {
+      setTheme(storedTheme);
+    } else {
+      setTheme(prefersDarkMode ? 'dark' : 'light');
+    }
+  }, [prefersDarkMode]);
+
+  useEffect(() => {
+    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (event) => {
+      setPrefersDarkMode(event.matches);
+    };
+
+    darkModeMediaQuery.addListener(handleChange);
+    setPrefersDarkMode(darkModeMediaQuery.matches);
+
+    return () => {
+      darkModeMediaQuery.removeListener(handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
+  return { theme, toggleTheme };
+};
+
 export default function Home() {
   const router = useRouter();
   const [isLogined, setIsLogined] = useState(false);
@@ -42,7 +85,7 @@ export default function Home() {
 
   useEffect(() => {
     let token = localStorage.getItem('token')
-    if(!token){
+    if (!token) {
       router.push('auth')
     }
     const userData = getUserData()
@@ -53,6 +96,33 @@ export default function Home() {
   const onDrawerClose = () => {
     setDrawerOpen(false)
   }
+
+  const [isDark, setDark] = useState(true);
+  // const theme = isDark ? dark : light;
+
+  // const [prefersDarkMode, setPrefersDarkMode] = useState(
+  //   window?.matchMedia('(prefers-color-scheme: dark)').matches
+  // );
+  // const [theme, setTheme] = useState('dark');
+
+  // const toggleTheme = () => {
+  //   const newTheme = theme === 'dark' ? 'light' : 'dark';
+  //   setTheme(newTheme);
+  //   localStorage.setItem('theme', newTheme); // Save theme preference in local storage
+  // };
+
+  // useEffect(() => {
+  //   const storedTheme = localStorage.getItem('theme');
+  //   if (storedTheme) {
+  //     setTheme(storedTheme);
+  //   }
+  // }, []);
+
+  // useEffect(() => {
+  //   document.documentElement.setAttribute('data-theme', theme);
+  // }, [theme]);
+
+  const { theme, toggleTheme } = useDarkMode();
 
   return (
     <main className={styles.main}>
@@ -69,17 +139,39 @@ export default function Home() {
           <span>AI<span>DROP</span></span>
         </div>
 
-        <FontAwesomeIcon
-          icon={faBars}
-          style={{
-            width: 30,
-            height: 30,
-          }}
-          className={styles.menu}
-          onClick={() => setDrawerOpen(true)}
-        />
+
+
+        <div className={styles.menu}>
+
+
+          <DarkModeSwitch
+            // style={{ marginBottom: '2rem' }}
+            checked={theme === 'dark'}
+            onChange={toggleTheme}
+            size={30}
+          />
+
+          <FontAwesomeIcon
+            icon={faBars}
+            style={{
+              width: 30,
+              height: 30,
+            }}
+            // className={styles.menu}
+            onClick={() => setDrawerOpen(true)}
+          />
+        </div>
 
         <section>
+          <span style={{ marginRight: '1rem' }}>
+            <DarkModeSwitch
+              // style={{ marginBottom: '2rem' }}
+              checked={theme === 'dark'}
+              onChange={toggleTheme}
+              size={30}
+            />
+          </span>
+
           <span className={styles.profile_text}>A</span>
           {userData.name}
           <Button className={styles.logout} colorScheme='whiteAlpha'
@@ -95,15 +187,12 @@ export default function Home() {
       <div className={styles.center}>
         <Carousel />
       </div>
-
       <div>
-
       </div>
       <div className={styles.grid}>
 
         <Link
           className={styles.card}
-          // target="_blank"
           rel="noopener noreferrer"
           href="/large-airdrop"
         >
@@ -115,7 +204,6 @@ export default function Home() {
 
         <Link
           className={styles.card}
-          // target="_blank"
           rel="noopener noreferrer"
           href="/small-airdrop"
         >
@@ -126,7 +214,11 @@ export default function Home() {
         </Link>
       </div>
       <button className={styles.telegram}>
-        <img src='/assets/telegram.png' />
+        <Image
+          width={50}
+          height={50}
+          src='/assets/telegram.svg' alt='telegram' />
+        <p>Contact Us</p>
       </button>
 
       <Drawer
@@ -135,7 +227,6 @@ export default function Home() {
       >
         <DrawerOverlay />
         <DrawerContent>
-          {/* <DrawerCloseButton className='drawer-close-btn' /> */}
           <DrawerHeader>
             <div className='drawer-header'>
               <Image
