@@ -38,6 +38,7 @@ const layout2 = ({ children }) => {
     const getUserData = async () => {
         try {
             const response = await axios.get('api/users/getUserData');
+            
             setUserData(response.data.data)
         } catch (error) {
             console.log(error)
