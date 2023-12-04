@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faB, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import { Pagination } from "swiper/modules";
 import { IconButton } from '@chakra-ui/react'
 
 import {
@@ -24,7 +23,6 @@ import {
   Avatar
 } from '@chakra-ui/react'
 
-import '../auth/styles.css'
 import Link from 'next/link'
 
 export default function Home() {
@@ -38,43 +36,12 @@ export default function Home() {
     setDrawerOpen(false)
   }
 
-  
+
 
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <div>
-          <Image
-            src="/airdrop_a.svg"
-            alt="Vercel Logo2"
-            className={styles.vercelLogo}
-            width={34}
-            height={34}
-            priority
-          />
-          <span>AI<span>DROP</span></span>
-        </div>
+    <>
 
-        <FontAwesomeIcon
-          icon={faBars}
-          style={{
-            width: 30,
-            height: 30,
-          }}
-          className={styles.menu}
-          onClick={() => setDrawerOpen(true)}
-        />
-
-        <section>
-          <span className={styles.profile_text}>A</span>
-          Apurba Ruidas
-          <Button className={styles.logout} colorScheme='whiteAlpha'>Logout</Button>
-        </section>
-
-
-      </div>
-
-      <h1 className='airdrop-header'>
+      <h1 className={styles.airdrop_header}>
         Small Airdrops
       </h1>
       <div className={styles.grid}>
@@ -112,67 +79,6 @@ export default function Home() {
           <p>A small airdrop involves distributing a relatively small number of tokens or coins to a more limited set of recipients. Small airdrops are typically used for promotional purposes, rewarding early users, or as a way to introduce a new cryptocurrency to a specific audience.</p>
         </Link>
       </div>
-
-
-      <button className={styles.telegram}>
-        <img src='/assets/telegram.png' />
-      </button>
-
-      <Drawer
-        isOpen={drawerOpen}
-        size={"full"}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          {/* <DrawerCloseButton className='drawer-close-btn' /> */}
-          <DrawerHeader>
-            <div className='drawer-header'>
-              <Image
-                src="/airdrop_a.svg"
-                alt="Vercel Logo2"
-                className={styles.vercelLogo}
-                width={34}
-                height={34}
-                priority
-              />
-              <span>AI<span>DROP</span></span>
-              <FontAwesomeIcon
-                icon={faXmark}
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-                className='drawer-close-btn'
-                onClick={() => setDrawerOpen(false)}
-              />
-            </div>
-
-          </DrawerHeader>
-          <DrawerBody>
-
-            <div className='div-container'>
-              <Avatar
-                size={'lg'}
-              />
-              <p>Apurba Ruidas</p>
-            </div>
-
-            <Button
-              className={styles.logout2}
-              colorScheme='whiteAlpha'
-              onClick={() => {
-                setIsLogined(prevState => !prevState)
-                setDrawerOpen(false)
-              }}
-            >
-              Logout
-
-            </Button>
-
-
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-    </main>
+    </>
   )
 }

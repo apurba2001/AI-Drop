@@ -1,4 +1,4 @@
-import connect from '../../../DB'
+import connect from '../../../database'
 import User from '../../../models'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'

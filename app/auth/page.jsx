@@ -1,24 +1,14 @@
 'use client'
 
-import Image from 'next/image'
-import styles from '../page.module.css'
-import { useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faL, faXmark } from '@fortawesome/free-solid-svg-icons';
-import './styles.css'
 
+import styles from './styles.modules.css'
+import { useEffect, useState } from 'react'
 import {
   FormControl,
   FormLabel,
   FormErrorMessage,
   Input,
   Button,
-  FormHelperText,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
 } from '@chakra-ui/react'
 
 import { validate } from 'react-email-validator'
@@ -26,6 +16,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import AuthCode from 'react-auth-code-input';
 import toast from 'react-hot-toast';
+import { faL } from '@fortawesome/free-solid-svg-icons'
+
+
 
 export default function Home() {
   const router = useRouter()
@@ -40,7 +33,6 @@ export default function Home() {
   const [verificationCode, setVerificationCode] = useState(null)
   const [verificationTimer, setVerificationTimer] = useState(45)
 
-  // useEffect()
 
 
   const handleInput = (e) => {
@@ -94,10 +86,8 @@ export default function Home() {
     setErrors(errors);
     console.log(errors)
 
-    // Return true if there are no errors, indicating that the data is valid
     return Object.keys(errors).length === 0;
   };
-
 
   const handleAuthRequest = async () => {
     if (!validateData()) {
@@ -109,8 +99,6 @@ export default function Home() {
       if (isLogined) {
         const res = await axios.post('api/users/login', formData)
         setFormData({})
-        toast.success('Login successful')
-        localStorage.setItem('token', res.data.token)
         router.push('/');
       } else {
         const res = await axios.post('api/users/signup', formData)
@@ -132,54 +120,12 @@ export default function Home() {
 
 
   return (
-    <main className={styles.main2}>
-      <div className={styles.description}>
-        <div>
-          <Image
-            src="/airdrop_a.svg"
-            alt="Vercel Logo2"
-            className={styles.vercelLogo}
-            width={34}
-            height={34}
-            priority
-          />
-          <span>AI<span>DROP</span></span>
-        </div>
-
-        <FontAwesomeIcon
-          icon={faBars}
-          style={{
-            width: 30,
-            height: 30,
-          }}
-          className={styles.menu}
-          onClick={() => setDrawerOpen(true)}
-        />
-
-        <section>
-          <Button
-            className={styles.logout}
-            colorScheme='whiteAlpha'
-            onClick={() => setIsLogined(prevState => !prevState)}
-          >
-            {
-              isLogined ? 'Sign Up' : 'Login'
-            }
-
-          </Button>
-        </section>
-
-
-      </div>
-
-
+    <>
       {
         isVerify ? (
-          <div className='card'>
+          <div className={styles.card}>
             <h1>Verify email</h1>
-
-
-            <div className='verify-input-container'>
+            <div className={styles.verify_input_container}>
               <AuthCode
                 length={5}
                 autoFocus={true}
@@ -187,11 +133,11 @@ export default function Home() {
               />
             </div>
 
-            <p className='verification-message'>We've sent a verification code to your email address. Please check your inbox and enter the code below to complete the registration process.</p>
+            <p className={styles.verification_message}>We've sent a verification code to your email address. Please check your inbox and enter the code below to complete the registration process.</p>
 
 
 
-            <div className='button-container'>
+            <div className={styles.button_container}>
               <p>Resend code {verificationTimer}</p>
               <Button
                 isLoading={loader}
@@ -259,59 +205,28 @@ export default function Home() {
             <Button
               isLoading={loader}
               onClick={handleAuthRequest}
-              colorScheme='whiteAlpha'>{isLogined ? 'Login' : 'Sign Up'}</Button>
+              colorScheme='whiteAlpha'>{isLogined ? 'Login' : 'Sign Up'}
+            </Button>
+
+            {
+              isLogined ? (
+                <p className={'signup'}>Don't have an account? {"   "}
+                  <span onClick={() => {
+                    setErrors({})
+                    setIsLogined(false)
+                  }}>Sign Up</span></p>
+              ) : (
+                <p className={'signup'}>Already have an account?   {"   "}
+                  <span onClick={() => {
+                    setErrors({})
+                    setIsLogined(true)
+                  }}>Login</span></p>
+              )
+            }
           </div>
         )
       }
-      <Drawer
-        isOpen={drawerOpen}
-        size={"full"}
-      >
-        <DrawerOverlay />
-        <DrawerContent>
-          {/* <DrawerCloseButton className='drawer-close-btn' /> */}
-          <DrawerHeader>
-            <div className='drawer-header'>
-              <Image
-                src="/airdrop_a.svg"
-                alt="Vercel Logo2"
-                className={styles.vercelLogo}
-                width={34}
-                height={34}
-                priority
-              />
-              <span>AI<span>DROP</span></span>
-              <FontAwesomeIcon
-                icon={faXmark}
-                style={{
-                  width: 30,
-                  height: 30,
-                }}
-                className='drawer-close-btn'
-                onClick={() => setDrawerOpen(false)}
-              />
-            </div>
 
-          </DrawerHeader>
-          <DrawerBody>
-
-            <Button
-              className={styles.logout2}
-              colorScheme='whiteAlpha'
-              onClick={() => {
-                setIsLogined(prevState => !prevState)
-                setDrawerOpen(false)
-              }}
-            >
-              {
-                isLogined ? 'Sign Up' : 'Login'
-              }
-
-            </Button>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
-
-    </main>
+    </>
   )
 }

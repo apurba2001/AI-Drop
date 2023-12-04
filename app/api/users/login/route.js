@@ -1,9 +1,10 @@
-import connect from '../../../DB'
+import connect from '../../../database'
 import User from '../../../models'
 import { NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import moment from 'moment'
 import jwt from 'jsonwebtoken'
+import { encodeToken } from '../../../helpers/tokenEncodeDecode'
 
 connect()
 
@@ -23,14 +24,21 @@ export const POST = async (request) => {
             return NextResponse.json({ message: 'Invalid credentials' }, { status: 401 });
         }
 
-        // Password is correct, generate JWT token
+
         const token = jwt.sign(
-            { userId: existingUser._id, email: existingUser.email , name: existingUser.name},
-            process.env.PASSWORD_SICRETKEY, // Replace 'your_secret_key' with a secure random string
+            { userId: existingUser._id, email: existingUser.email, name: existingUser.name },
+            process.env.JWT_ENCRYPTION_KEY, // Replace 'your_secret_key' with a secure random string
             { expiresIn: '30d' } // Token expires in 30 days (1 month)
         );
 
-        return NextResponse.json({ token }, { status: 200 });
+        const reEncodedToken = encodeToken(token)
+        const response = NextResponse.json({ token: reEncodedToken }, { status: 200 })
+
+        response.cookies.set('token', reEncodedToken, {
+            httpOnly: true
+        })
+
+        return response
     } catch (error) {
         console.error('Error:', error.message);
         return NextResponse.json({ message: 'Error during authentication' }, { status: 500 });

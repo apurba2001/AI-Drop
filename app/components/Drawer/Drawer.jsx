@@ -1,3 +1,5 @@
+'use client'
+
 import {
     Drawer,
     DrawerBody,
@@ -6,25 +8,58 @@ import {
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton,
+    Avatar,
+    Button
 } from '@chakra-ui/react'
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Image from 'next/image'
+import styles from './style.module.css'
 
-const DrawerComponent = ({ onClose, isOpen }) => {
+const DrawerComponent = ({ isOpen, setIsOpen, handleLogout, userData }) => {
+
     return (
-        <Drawer onClose={onClose} isOpen={isOpen} size={"full"}>
+        <Drawer isOpen={isOpen} size={"full"}>
             <DrawerOverlay />
             <DrawerContent>
-                <DrawerCloseButton />
-                <DrawerHeader>{`${size} drawer contents`}</DrawerHeader>
+                <DrawerHeader>
+                    <div className={styles.drawerHeader}>
+                        <Image
+                            src="/airdrop_a.svg"
+                            alt="Vercel Logo2"
+                            className={styles.vercelLogo}
+                            width={34}
+                            height={34}
+                            priority
+                        />
+                        <span>AI<span>DROP</span></span>
+
+                    </div>
+                    <FontAwesomeIcon
+                        icon={faXmark}
+                        style={{
+                            width: 30,
+                            height: 30,
+                        }}
+                        className='drawer-close-btn'
+                        onClick={() => setIsOpen(false)}
+                    />
+                </DrawerHeader>
                 <DrawerBody>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Consequat nisl vel pretium lectus quam id. Semper quis lectus
-                        nulla at volutpat diam ut venenatis. Dolor morbi non arcu risus
-                        quis varius quam quisque. Massa ultricies mi quis hendrerit dolor
-                        magna eget est lorem. Erat imperdiet sed euismod nisi porta.
-                        Lectus vestibulum mattis ullamcorper velit.
-                    </p>
+                    <div className={styles.divContainer}>
+                        <Avatar
+                            size={'lg'}
+                        />
+                        <p>{userData?.name}</p>
+                    </div>
+
+                    <Button
+                        className={styles.logout2}
+                        colorScheme='whiteAlpha'
+                        onClick={handleLogout}
+                    >
+                        Logout
+                    </Button>
                 </DrawerBody>
             </DrawerContent>
         </Drawer>
