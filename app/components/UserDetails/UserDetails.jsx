@@ -105,10 +105,10 @@ const UserDetails = ({ setDrawerOpen, isMenu, userData, handleLogout }) => {
                     />
                 </span>
                 {
-                    isMenu && (
+                    isMenu && userData?.name && (
                         <>
                             <span className={styles.profile_text}>{userData?.name?.charAt(0).toUpperCase()}</span>
-                            {userData.name}
+                            <p > {userData.name}</p>
                             <Button className={styles.logout}
                                 colorScheme='whiteAlpha'
                                 onClick={handleLogout}

@@ -18,7 +18,7 @@ import { useRouter } from 'next/navigation';
 
 const layout2 = ({ children }) => {
     const [isDrawerOpen, setIsDrawerOpen] = useState(false)
-    const [userData, setUserData] = useState({})
+    const [userData, setUserData] = useState({ name: '' })
     const router = useRouter()
 
     const pathname = usePathname()
@@ -27,6 +27,9 @@ const layout2 = ({ children }) => {
         try {
             const response = await axios.get('api/users/logout');
             router.push('/auth')
+            if (isDrawerOpen) {
+                setIsDrawerOpen(false)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -40,6 +43,8 @@ const layout2 = ({ children }) => {
             console.log(error)
         }
     }
+
+    console.log(userData)
 
     useEffect(() => {
         if (pathname !== '/auth') {
@@ -75,6 +80,7 @@ const layout2 = ({ children }) => {
                 isOpen={isDrawerOpen}
                 setIsOpen={setIsDrawerOpen}
                 handleLogout={handleLogout}
+                userData={userData}
             />
         </main>
     )

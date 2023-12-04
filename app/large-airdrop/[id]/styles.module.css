@@ -4,17 +4,18 @@
 }
 
 .main_airdrop_container div {
-    padding: 1rem 1.2rem;
+    padding: 1rem 0;
     border-radius: var(--border-radius);
     background: rgba(var(--card-rgb), 0);
     border: 1px solid rgba(var(--card-border-rgb), 0);
     transition: background 200ms, border 200ms;
-    cursor: pointer;
+    
 }
 
 .main_airdrop_container div h4 {
     font-weight: 700;
     font-size: 25px;
+    margin-top: 15px;
 }
 
 .main_airdrop_container div p {
@@ -29,15 +30,22 @@
 
 
 .airdrop_header {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 700;
     width: 100%;
     padding-left: 5px;
     max-width: var(--max-width);
     margin-top: 5.5rem;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .main_container {
     padding-bottom: 20px;
+}
+
+
+@media (max-width: 700px) {
+    .airdrop_header {
+        margin-top: 5rem;
+    }
 }

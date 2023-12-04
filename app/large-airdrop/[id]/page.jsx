@@ -32,30 +32,32 @@ export default function Home() {
     return (
         <div className={styles.main_container}>
             <h1 className={styles.airdrop_header}>
-                Airdrops XYZ
+                Binance Airdrop
             </h1>
             <div className={styles.main_airdrop_container}>
 
                 <div>
+                    <img src="/images/img1.jpg" alt="1" />
                     <h4>
-                        Step 1 do this
+                        Create account in Binance
                     </h4>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
-                    <img src="/images/img1.jpg" alt="1" />
+
                 </div>
             </div>
 
             <div className={styles.main_airdrop_container}>
                 <div>
+                    <img src="/images/img2.jpeg" alt="1" />
                     <h4>
-                        Step 2 do this
+                        Link your Metamask account
                     </h4>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
-                    <img src="/images/img2.jpeg" alt="1" />
+
                 </div>
             </div>
         </div>
